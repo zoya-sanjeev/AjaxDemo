@@ -30,3 +30,8 @@ function makePromiseCall(methodType, url, async = true, data= null){
         console.log(methodType+" request sent to server at:"+ showTime());
     });
 }
+
+function showTime(){
+    const date = new Date();
+    return date.getHours()+"Hrs: " + date.getMinutes() + "Mins: " + date.getSeconds() + "Secs";
+}
