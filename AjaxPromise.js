@@ -37,3 +37,12 @@ makePromiseCall("GET" , getURL, true)
         console.log("Get User Data: "+ responseText)
     })
     .catch(error => console.log("GET Error Status" + JSON.stringify(error)));
+console.log("Made GET Promise Call to Server at:"+ showTime());
+
+const deleteURL ="http://127.0.0.1:3000/employees/1";
+makePromiseCall("DELETE" , deleteURL, false)
+    .then(responseText =>{
+        console.log("USer Deleted: "+ responseText)
+    })
+    .catch(error => console.log("DELETE Error Status" + JSON.stringify(error)));
+console.log("Made GET Promise Call to Server at:"+ showTime());
