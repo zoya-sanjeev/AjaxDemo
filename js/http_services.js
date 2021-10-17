@@ -2,21 +2,22 @@ function makePromiseCall(methodType, url, async = true, data= null){
     return new Promise(function(resolve, reject){
         let xhr = new XMLHttpRequest();
         xhr.onload = function(){
-            if(xhr.readyState === 4){
-                if(xhr.status === 200 || xhr.status === 201){
-                    resolve(xhr.responseText);
-                }else if (xhr.status >= 400){
-                    reject({
-                        status: xhr.status,
-                        statusText: xhr.statusText
-                    });
-                    console.log("Handle 400 Client Error or 500 Server Error at:"+ showTime());
-                }
+            console.log(methodType + "State Changed Called. Ready State: "+
+                xhr.readyState+" Status:"+ xhr.status);
+            if(xhr.status.toString().match('^[2][0-9]{2}$')){
+                resolve(xhr.responseText);
+            }else if (xhr.status.toString().match('^[4,5][0-9]{2}$')){
+                reject({
+                    status: xhr.status,
+                    statusText: xhr.statusText
+                });
+                console.log("XHR Failed");
             }
+            
         }
         xhr.onerror = function(){
             reject({
-                staus: xhr.status,
+                staus: this.status,
                 statusText:xhttp.statusText
             })
         }
